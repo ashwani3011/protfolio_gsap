@@ -1,79 +1,102 @@
 gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(TextPlugin);
+gsap.registerPlugin(MotionPathPlugin);
 
-// gsap.fromTo(
-//   ".about",
-//   {
-//     x: "-=100",
-//   },
-//   {
-//     x: 0,
-//     ease: "linear",
-//     duration: 0.8,
-//     scrollTrigger: {
-//       start: "top center",
-//       trigger: ".about",
-//       toggleActions: "restart complete restart complete",
-//     },
-//   }
-// );
+const words = ["A Developer.", "A Designer", "Sample"];
 
-// gsap.fromTo(
-//   ".skills-container",
-//   {
-//     x: "+=100",
-//   },
-//   {
-//     x: 0,
-//     duration: 0.8,
-//     ease: "linear",
-//     scrollTrigger: {
-//       start: "top center",
-//       trigger: ".skills-container",
-//       toggleActions: "restart complete restart complete",
-//     },
-//   }
-// );
+let cursor = gsap.to(".cursor", {
+  opacity: 0,
+  ease: "power2.inOut",
+  repeat: -1,
+});
 
-// gsap.fromTo(
-//   ".projects-container",
-//   {
-//     x: "-=100",
-//   },
-//   {
-//     x: 0,
-//     ease: "linear",
-//     duration: 0.8,
-//     scrollTrigger: {
-//       start: "top center",
-//       trigger: ".projects-container",
-//       toggleActions: "restart complete restart complete",
-//     },
-//   }
-// );
+let masterTl = gsap.timeline({
+  repeat: -1,
+});
 
-// gsap.fromTo(
-//   ".contact",
-//   {
-//     x: "+=100",
-//   },
-//   {
-//     x: 0,
-//     ease: "linear",
-//     duration: 0.8,
-//     scrollTrigger: {
-//       start: "top 90%",
-//       trigger: ".contact",
-//       toggleActions: "restart complete restart complete",
-//     },
-//   }
-// );
+words.forEach((word) => {
+  let tl = gsap.timeline({ repeat: 1, yoyo: true, repeatDelay: 1 });
+  tl.to(".text", { duration: 1, text: word });
+  masterTl.add(tl);
+});
+
+//==============================
+
+let planeTl = gsap.timeline({
+  scrollTrigger: {
+    trigger: ".hero",
+    // start: "top",
+    // pin: true,
+    // scrub: 0.2,
+    // start: "top top",
+    toggleActions: "play none none reset",
+  },
+});
+
+planeTl.to(".header-plane", {
+  duration: 5,
+  motionPath: {
+    path: "M21,21 C426,413 995,12 708,416 M701,421 C137,0 1593,6 1196,586",
+    autoRotate: true,
+  },
+});
+
+//====================================
+
+let aboutTl = gsap.timeline({
+  scrollTrigger: {
+    trigger: ".about-section",
+    start: "top center",
+    toggleActions: "play none none reset",
+  },
+});
+
+aboutTl
+  .set(".about-avtar", { opacity: 0 })
+  .set(".about-reveal", { opacity: 0 })
+  .fromTo(
+    ".about-reveal",
+    { opacity: 1, width: 0 },
+    { width: 500, duration: 0.5, ease: "linear" }
+  )
+  .fromTo(
+    ".about-reveal",
+    { width: 500, scaleX: 1 },
+    {
+      x: "-50%",
+      width: 0,
+      scaleX: 0,
+      duration: 0.8,
+      ease: "linear",
+      delay: 0.5,
+    }
+  )
+  .to(".about-avtar", { opacity: 1, scaleX: 1, duration: 1 }, "-=0.5")
+  .set(".about-reveal", { x: 0, width: 0 })
+  .set(".about-plane", { opacity: 0 })
+  .to(".about-plane", { x: "+=500", y: "-=300", opacity: 1 })
+  // .set(".about-plane", { right: 0, top: 0 })
+  .to(
+    ".about-plane",
+    {
+      duration: 5,
+      motionPath: {
+        path: "M1489,-1 C125,153 569,223 784,460 M779,463 C1156,153 -850,-70 -1101,1196",
+        autoRotate: true,
+      },
+    },
+    "-=2"
+  )
+  .to("about-plane", { x: -2500 });
+
+//skills ==============================
 
 let skillsTL = gsap.timeline({
   scrollTrigger: {
     trigger: ".skills-container",
-    start: "top 70%",
-    end: "top 30%",
-    // toggleActions: "play complete restart complete",
+    start: "top 10%",
+
+    toggleActions: "play none none reset",
   },
 });
 
@@ -94,38 +117,25 @@ skillsTL
     { x: "+=1000", opacity: 0 },
     { x: 0, stagger: 0.7, ease: "linear", opacity: 1 },
     "-=2.1"
+  )
+  .to(
+    ".skills-plane",
+    {
+      duration: 5,
+      motionPath: {
+        path: "M1489,-1 C125,153 569,223 784,460 M779,463 C1156,153 -850,-70 -1101,1196",
+        autoRotate: true,
+      },
+    },
+    "-=2"
   );
 
-let aboutTl = gsap.timeline({
-  scrollTrigger: {
-    trigger: ".about-section",
-    start: "top 99%",
-    toggleActions: "play complete none play",
-  },
-});
-
-aboutTl
-  .set(".about-image>img", { opacity: 0 })
-  .to(".about-reveal", {
-    opacity: 1,
-    scaleX: 0,
-    xPercent: -100,
-    duration: 2,
-    ease: "power2.inOut",
-  })
-  .fromTo(".about-reveal", { x: "+=50" }, { x: "-=50", duration: 1 }, "-=1")
-  .to(".about-image>img", { opacity: 1, scaleX: 1, duration: 1 }, "-=0.5")
-  .to(".about-box", {
-    duration: 1,
-    width: "26vw",
-    opacity: 1,
-    ease: "power4.inOut",
-  });
+//projects ===============================
 
 let projectsTl = gsap.timeline({
   scrollTrigger: {
     trigger: ".projects-container",
-    start: "top 60%",
+    start: "top 15%",
     toggleActions: "play none none reset",
   },
 });
@@ -144,28 +154,29 @@ projectsTl
     ease: "power4.inOut",
   });
 
+//=============================
+
 let contactTl = gsap.timeline({
   scrollTrigger: {
     trigger: ".contact",
-    start: "top 99%",
-    toggleActions: "restart complete play complete",
+    start: "top 50%",
+    toggleActions: "play none none reset",
   },
 });
 
 contactTl
   .fromTo(
     ".button-c1",
-    { x: "-=10000", opacity: 0 },
-    { x: 0, opacity: 1, duration: 1, ease: "linear" }
+    { x: "-=2000", opacity: 0 },
+    { x: 0, opacity: 1, duration: 0.7, ease: "linear" }
   )
   .fromTo(
     ".button-c2",
     { x: "+=2000", opacity: 0 },
-    { x: 0, opacity: 1, duration: 1, ease: "linear" },
-    "-=1"
+    { x: 0, opacity: 1, duration: 0.7, ease: "linear" },
+    "-=0.7"
   )
   .to(".contact-box", {
-    duration: 1,
     width: "20.5vw",
     opacity: 1,
     ease: "power4.inOut",
@@ -174,8 +185,8 @@ contactTl
 let footerTl = gsap.timeline({
   scrollTrigger: {
     trigger: ".footer",
-    start: "top 99%%",
-    toggleActions: "restart complete none complete",
+    start: "top 80%",
+    toggleActions: "play none none reset",
   },
 });
 
@@ -185,34 +196,30 @@ footerTl.fromTo(
   { opacity: 1, duration: 2, ease: "linear" }
 );
 
-// let planeTl = gsap.timeline({
-//   scrollTrigger: {
-//     trigger: ".hero",
-//     // start: "top",
-//     toggleActions: "restart complete none complete",
-//   },
-// });
+//=======================================
 
 // planeTl.fromTo(".plane", { rotationX: 0 }, { rotationX: 20 });
 
-gsap.set(".plane", { xPercent: -50 });
+// gsap.set(".plane", { xPercent: -50 });
 
-let rotate = gsap
-  .timeline({
-    scrollTrigger: {
-      trigger: ".hero",
-      pin: true,
-      scrub: 0.2,
-      start: "top top",
-      //   end: "+=10000",
-    },
-  })
-  .to(".plane", {
-    rotation: 90,
-    duration: 0.5,
-    ease: "none",
-  })
-  .to(".plane", { x: "+=1200", y: "+=500" });
+// let rotate = gsap
+//   .timeline({
+//     scrollTrigger: {
+//       trigger: ".hero",
+// pin: true,
+// scrub: 0.2,
+// start: "top top",
+//       // end: "+=10000",
+//     },
+//   })
+//   .to(".plane", {
+//     rotation: 90,
+//     duration: 0.5,
+//     ease: "none",
+//   })
+//   .to(".plane", { x: "+=1200", y: "+=500" });
+
+//===================================================
 
 //   .set(".about-reveal", { top: 0, left: 00, scale: 1, opacity: 1 })
 //     .to(".about-reveal", { scaleX: 1, xPercent: -40, duration: 1 })
