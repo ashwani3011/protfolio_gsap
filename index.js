@@ -33,7 +33,7 @@ planeTl.fromTo(
   {
     duration: 6,
     motionPath: {
-      path: "M6,123 C555,-1 398,1 820,450 M820,450 C1247,390 1229,138 1420,250",
+      path: "M6,123 C555,-1 398,1 820,450 M820,450 C1247,390 1229,138 1450,250",
       autoRotate: true,
     },
   }
@@ -160,7 +160,7 @@ contactTl
     "-=0.7"
   )
   .to(".contact-box", {
-    width: "20.5vw",
+    width: "21.5vw",
     opacity: 1,
     ease: "power4.inOut",
   });
