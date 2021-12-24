@@ -33,16 +33,13 @@ planeTl.fromTo(
   {
     duration: 6,
     motionPath: {
-      path: "M6,123 C555,-1 398,1 820,450 M820,450 C1247,390 1229,138 1450,250",
+      // path: "M6,123 C555,-1 398,1 820,450 M820,450 C1247,390 1229,138 1450,250",
+      // path: "M10,-24 C729,-5 583.163,422.33 371,369 -99.864,250.641 686,-37 1184,-25 ",
+      path: "M-22,-26 C697,-7 872.21,868.119 493,439 431.697,369.63 887,3 1264,-87 ",
       autoRotate: true,
     },
   }
 );
-
-// M3,3 C229,247 7,593 767,505 M764,500 C1047,285 1102,236 1391,6
-
-// M3,3 C1160,502 639,598 1350,-20
-// .to(".plane", { rotation: -30 }, "-=1");
 
 //====================================
 
@@ -50,7 +47,7 @@ let aboutTl = gsap.timeline({
   scrollTrigger: {
     trigger: ".about-section",
     start: "top center",
-    toggleActions: "play none none reset",
+    toggleActions: "restart pause resume complete",
   },
 });
 
@@ -90,7 +87,7 @@ let skillsTL = gsap.timeline({
     trigger: ".skills-container",
     start: "top 10%",
 
-    toggleActions: "play none none reset",
+    toggleActions: "restart complete complete reset",
   },
 });
 
@@ -119,7 +116,7 @@ let projectsTl = gsap.timeline({
   scrollTrigger: {
     trigger: ".projects-container",
     start: "top 15%",
-    toggleActions: "play none none reset",
+    toggleActions: "restart complete complete reset",
   },
 });
 
@@ -160,7 +157,7 @@ contactTl
     "-=0.7"
   )
   .to(".contact-box", {
-    width: "21.5vw",
+    width: "20.5vw",
     opacity: 1,
     ease: "power4.inOut",
   });
@@ -169,7 +166,7 @@ let footerTl = gsap.timeline({
   scrollTrigger: {
     trigger: ".footer",
     start: "top 80%",
-    toggleActions: "play none none reset",
+    toggleActions: "restart complete complete reset",
   },
 });
 
