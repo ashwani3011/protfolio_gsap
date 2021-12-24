@@ -23,23 +23,26 @@ words.forEach((word) => {
 //==============================
 
 let planeTl = gsap.timeline({
-  scrollTrigger: {
-    trigger: ".hero",
-    // start: "top",
-    // pin: true,
-    // scrub: 0.2,
-    // start: "top top",
-    toggleActions: "play none none reset",
-  },
+  repeat: -1,
+  repeatDelay: 1,
 });
 
-planeTl.to(".header-plane", {
-  duration: 5,
-  motionPath: {
-    path: "M21,21 C426,413 995,12 708,416 M701,421 C137,0 1593,6 1196,586",
-    autoRotate: true,
-  },
-});
+planeTl.fromTo(
+  ".plane",
+  { rotation: 120 },
+  {
+    duration: 6,
+    motionPath: {
+      path: "M6,123 C555,-1 398,1 820,450 M820,450 C1247,390 1229,138 1396,250",
+      autoRotate: true,
+    },
+  }
+);
+
+// M3,3 C229,247 7,593 767,505 M764,500 C1047,285 1102,236 1391,6
+
+// M3,3 C1160,502 639,598 1350,-20
+// .to(".plane", { rotation: -30 }, "-=1");
 
 //====================================
 
@@ -73,21 +76,12 @@ aboutTl
   )
   .to(".about-avtar", { opacity: 1, scaleX: 1, duration: 1 }, "-=0.5")
   .set(".about-reveal", { x: 0, width: 0 })
-  .set(".about-plane", { opacity: 0 })
-  .to(".about-plane", { x: "+=500", y: "-=300", opacity: 1 })
-  // .set(".about-plane", { right: 0, top: 0 })
-  .to(
-    ".about-plane",
-    {
-      duration: 5,
-      motionPath: {
-        path: "M1489,-1 C125,153 569,223 784,460 M779,463 C1156,153 -850,-70 -1101,1196",
-        autoRotate: true,
-      },
-    },
-    "-=2"
-  )
-  .to("about-plane", { x: -2500 });
+  .to(".about-box", {
+    duration: 1,
+    width: "25vw",
+    opacity: 1,
+    ease: "power4.inOut",
+  });
 
 //skills ==============================
 
@@ -117,17 +111,6 @@ skillsTL
     { x: "+=1000", opacity: 0 },
     { x: 0, stagger: 0.7, ease: "linear", opacity: 1 },
     "-=2.1"
-  )
-  .to(
-    ".skills-plane",
-    {
-      duration: 5,
-      motionPath: {
-        path: "M1489,-1 C125,153 569,223 784,460 M779,463 C1156,153 -850,-70 -1101,1196",
-        autoRotate: true,
-      },
-    },
-    "-=2"
   );
 
 //projects ===============================
