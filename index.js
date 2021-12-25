@@ -94,7 +94,7 @@ let skillsTL = gsap.timeline({
 skillsTL
   .to(".skills-box", {
     duration: 1,
-    width: "13vw",
+    width: "11vw",
     opacity: 1,
     ease: "power4.inOut",
   })
