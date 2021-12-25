@@ -157,7 +157,7 @@ contactTl
     "-=0.7"
   )
   .to(".contact-box", {
-    width: "20.5vw",
+    width: "18.5vw",
     opacity: 1,
     ease: "power4.inOut",
   });
