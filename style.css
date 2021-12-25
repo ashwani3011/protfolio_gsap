@@ -392,7 +392,7 @@ h5 {
   margin-left: 0;
   padding-left: 0;
   height: 600px;
-  overflow: hidden;
+  /* overflow: hidden; */
   background-color: #e67e22;
 }
 
