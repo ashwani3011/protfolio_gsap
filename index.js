@@ -165,7 +165,7 @@ contactTl
 let footerTl = gsap.timeline({
   scrollTrigger: {
     trigger: ".footer",
-    start: "top 80%",
+    // start: "top 80%",
     toggleActions: "restart complete complete reset",
   },
 });
