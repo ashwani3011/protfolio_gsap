@@ -75,7 +75,7 @@ aboutTl
   .set(".about-reveal", { x: 0, width: 0 })
   .to(".about-box", {
     duration: 1,
-    width: "25vw",
+    width: "20vw",
     opacity: 1,
     ease: "power4.inOut",
   });
