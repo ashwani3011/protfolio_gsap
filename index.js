@@ -92,12 +92,7 @@ let skillsTL = gsap.timeline({
 });
 
 skillsTL
-  .to(".skills-box", {
-    duration: 1,
-    width: "11vw",
-    opacity: 1,
-    ease: "power4.inOut",
-  })
+
   .fromTo(
     ".line1",
     { x: "-=1000", opacity: 0 },
@@ -108,7 +103,13 @@ skillsTL
     { x: "+=1000", opacity: 0 },
     { x: 0, stagger: 0.7, ease: "linear", opacity: 1 },
     "-=2.1"
-  );
+  )
+  .to(".skills-box", {
+    duration: 1,
+    width: "11vw",
+    opacity: 1,
+    ease: "power4.inOut",
+  });
 
 //projects ===============================
 
