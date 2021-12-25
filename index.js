@@ -139,7 +139,7 @@ projectsTl
 let contactTl = gsap.timeline({
   scrollTrigger: {
     trigger: ".contact",
-    start: "top 50%",
+    start: "top 60%",
     toggleActions: "play none none reset",
   },
 });
