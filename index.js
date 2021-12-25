@@ -47,13 +47,12 @@ let aboutTl = gsap.timeline({
   scrollTrigger: {
     trigger: ".about-section",
     start: "top center",
-    toggleActions: "restart pause resume complete",
+    toggleActions: "restart complete complete reset",
   },
 });
 
 aboutTl
   .set(".about-avtar", { opacity: 0 })
-  .set(".about-reveal", { opacity: 0 })
   .fromTo(
     ".about-reveal",
     { opacity: 1, width: 0 },
@@ -61,21 +60,18 @@ aboutTl
   )
   .fromTo(
     ".about-reveal",
-    { width: 500, scaleX: 1 },
+    { width: 500 },
     {
-      x: "-50%",
       width: 0,
-      scaleX: 0,
       duration: 0.8,
       ease: "linear",
       delay: 0.5,
     }
   )
-  .to(".about-avtar", { opacity: 1, scaleX: 1, duration: 1 }, "-=0.5")
-  .set(".about-reveal", { x: 0, width: 0 })
+  .to(".about-avtar", { opacity: 1, duration: 1 }, "-=0.5")
   .to(".about-box", {
     duration: 1,
-    width: "20vw",
+    width: "23vw",
     opacity: 1,
     ease: "power4.inOut",
   });
